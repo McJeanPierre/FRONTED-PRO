@@ -1,0 +1,75 @@
+.hero {
+  position: relative;
+  height: 600px;
+  overflow: hidden;
+}
+
+.background {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background-color: black;
+  opacity: 0.6;
+}
+
+.content {
+  position: relative;
+  height: 100%;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.textContainer {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .textContainer {
+    width: 66.666667%;
+  }
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .title {
+    font-size: 3.75rem;
+  }
+}
+
+.description {
+  font-size: 1.25rem;
+  color: rgb(229, 231, 235);
+  margin-bottom: 2rem;
+}
+
+.button {
+  background-color: rgb(37, 99, 235);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 0.2s;
+}
+
+.button:hover {
+  background-color: rgb(29, 78, 216);
+}
