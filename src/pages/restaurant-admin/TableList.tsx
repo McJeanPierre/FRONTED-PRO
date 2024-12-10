@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, Edit, Trash2, Check, X } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { tableApi } from '../../services/tableApi';
 import { Table } from '../../types/table';
 import toast from 'react-hot-toast';
@@ -8,42 +8,54 @@ import toast from 'react-hot-toast';
 const TableList = () => {
   const [tables, setTables] = useState<Table[]>([]);
   const [loading, setLoading] = useState(true);
-  const restaurantId = 1; // This should come from auth context
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchTables();
   }, []);
 
   const fetchTables = async () => {
+    setLoading(true); // Mostrar el spinner de carga mientras se cargan los datos
     try {
-      const response = await tableApi.getAll(restaurantId);
+      const response = await tableApi.getAll(); // Obtener todas las mesas
       setTables(response.data);
     } catch (error) {
+      console.error('Error al cargar las mesas:', error);
       toast.error('Error al cargar las mesas');
     } finally {
-      setLoading(false);
+      setLoading(false); // Ocultar el spinner de carga
     }
   };
 
-  const handleDelete = async (tableId: number) => {
+  const handleDelete = async (mesa_id: number) => {
     if (window.confirm('¿Estás seguro de que deseas eliminar esta mesa?')) {
       try {
-        await tableApi.delete(restaurantId, tableId);
+        await tableApi.delete(mesa_id); // Eliminar la mesa
         toast.success('Mesa eliminada con éxito');
-        fetchTables();
+        fetchTables(); // Actualizar la lista después de eliminar
       } catch (error) {
+        console.error('Error al eliminar la mesa:', error);
         toast.error('Error al eliminar la mesa');
       }
     }
   };
 
-  const toggleAvailability = async (tableId: number, currentStatus: boolean) => {
+  const toggleAvailability = async (mesa_id: number, currentStatus: boolean) => {
     try {
-      await tableApi.updateAvailability(restaurantId, tableId, !currentStatus);
+      await tableApi.updateAvailability(mesa_id, !currentStatus); // Actualizar disponibilidad
       toast.success('Disponibilidad actualizada');
-      fetchTables();
+      fetchTables(); // Actualizar la lista después del cambio
     } catch (error) {
+      console.error('Error al actualizar disponibilidad:', error);
       toast.error('Error al actualizar la disponibilidad');
+    }
+  };
+
+  const handleEdit = (mesa_id: number) => {
+    if (mesa_id) {
+      navigate(`/restaurant-admin/tables/edit/${mesa_id}`); // Navegar a la vista de edición con el ID
+    } else {
+      toast.error('ID de la mesa no válido');
     }
   };
 
@@ -88,7 +100,7 @@ const TableList = () => {
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {tables.map((table) => (
-              <tr key={table.id}>
+              <tr key={table.mesa_id}>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="text-sm font-medium text-gray-900">Mesa {table.numero_mesa}</div>
                 </td>
@@ -97,7 +109,7 @@ const TableList = () => {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <button
-                    onClick={() => table.id && toggleAvailability(table.id, table.disponible || false)}
+                    onClick={() => toggleAvailability(table.mesa_id, table.disponible || false)}
                     className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
                       table.disponible
                         ? 'bg-green-100 text-green-800'
@@ -119,14 +131,14 @@ const TableList = () => {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                   <div className="flex justify-end space-x-2">
-                    <Link
-                      to={`/restaurant-admin/tables/edit/${table.id}`}
+                    <button
+                      onClick={() => handleEdit(table.mesa_id)}
                       className="text-blue-600 hover:text-blue-900"
                     >
                       <Edit className="w-5 h-5" />
-                    </Link>
+                    </button>
                     <button
-                      onClick={() => table.id && handleDelete(table.id)}
+                      onClick={() => handleDelete(table.mesa_id)}
                       className="text-red-600 hover:text-red-900"
                     >
                       <Trash2 className="w-5 h-5" />

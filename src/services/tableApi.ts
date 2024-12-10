@@ -1,19 +1,11 @@
 import api from './api';
-import { Table, TableFormData } from '../types/table';
+import { TableFormData } from '../types/table';
 
 export const tableApi = {
-  getAll: () => 
-    api.get(`/admin/mesas`),
-  
-  create: (data: TableFormData) => 
-    api.post(`/admin/mesas`, data),
-  
-  update: (tableId: number, data: TableFormData) => 
-    api.put(`/admin/mesas/${tableId}`, data),
-  
-  delete: (tableId: number) => 
-    api.delete(`/admin/mesas/${tableId}`),
-  
-  updateAvailability: (tableId: number, disponible: boolean) => 
-    api.patch(`/admin/mesas/${tableId}/disponibilidad`, { disponible })
+  getAll: () => api.get('/admin/mesas'),
+  getOne: (mesaId: number) => api.get(`/admin/mesas/${mesaId}`),
+  create: (data: TableFormData) => api.post(`/admin/mesas`, data),
+  update: (mesaId: number, data: TableFormData) => api.put(`/admin/mesas/${mesaId}`, data),
+  delete: (mesaId: number) => api.delete(`/admin/mesas/${mesaId}`),
+  updateAvailability: (mesaId: number, disponible: boolean) => api.post(`/admin/mesas/${mesaId}/disponibilidad`, { disponible })
 };

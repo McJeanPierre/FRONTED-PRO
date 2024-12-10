@@ -43,7 +43,7 @@ function App() {
               <Route path="/restaurant-admin" element={<Dashboard />} />
               <Route path="/restaurant-admin/tables" element={<TableList />} />
               <Route path="/restaurant-admin/tables/new" element={<TableForm />} />
-              <Route path="/restaurant-admin/tables/edit/:id" element={<TableForm />} />
+              <Route path="/restaurant-admin/tables/edit/:mesa_id" element={<TableForm />} />
             </Route>
           </Routes>
 
