@@ -19,9 +19,9 @@ api.interceptors.request.use((config) => {
 export const restaurantApi = {
   getAll: () => api.get('/superadmin/restaurante'),
   getOne: (id: number) => api.get(`/superadmin/restaurante/${id}`),
-  create: (data: any) => api.post('/superadmin/restaurante', data),
-  update: (id: number, data: any) => api.put(`/superadmin/restaurante/${id}`, data),
-  delete: (id: number) => api.delete(`superadmin/restaurante/${id}`),
+  create: (data: any) => api.post('/restaurantes', data),
+  update: (id: number, data: any) => api.put(`/restaurantes/${id}`, data),
+  delete: (id: number) => api.delete(`/superadmin/restaurante/${id}`),
 };
 
 export default api;

@@ -6,7 +6,7 @@ import toast from 'react-hot-toast';
 
 const RestaurantForm = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState<RestaurantFormData>({
     nombre_restaurante: '',
@@ -18,35 +18,17 @@ const RestaurantForm = () => {
 
   useEffect(() => {
     if (id) {
-      fetchRestaurant();
+      fetchRestaurant(id);
     }
   }, [id]);
 
-  const fetchRestaurant = async () => {
+  const fetchRestaurant = async (restaurantId: string) => {
+    setLoading(true);
     try {
-      const response = await restaurantApi.getOne(Number(id));
+      const response = await restaurantApi.getOne(Number(restaurantId));
       setFormData(response.data);
     } catch (error) {
       toast.error('Error al cargar el restaurante');
-      navigate('/admin/restaurants');
-    }
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-
-    try {
-      if (id) {
-        await restaurantApi.update(Number(id), formData);
-        toast.success('Restaurante actualizado con éxito');
-      } else {
-        await restaurantApi.create(formData);
-        toast.success('Restaurante creado con éxito');
-      }
-      navigate('/admin/restaurants');
-    } catch (error) {
-      toast.error('Error al guardar el restaurante');
     } finally {
       setLoading(false);
     }
@@ -57,6 +39,26 @@ const RestaurantForm = () => {
       ...formData,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      if (id) {
+        await restaurantApi.update(Number(id), formData);
+        toast.success('Restaurante actualizado correctamente');
+      } else {
+        await restaurantApi.create(formData);
+        toast.success('Restaurante creado correctamente');
+      }
+      navigate('/admin/restaurants');
+    } catch (error) {
+      toast.error('Error al guardar el restaurante');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

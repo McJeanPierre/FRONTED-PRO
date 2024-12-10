@@ -1,5 +1,5 @@
 export interface Restaurant {
-  id?: number;
+  restaurante_id?: number;
   nombre_restaurante: string;
   direccion: string;
   telefono: string;
@@ -9,6 +9,7 @@ export interface Restaurant {
 }
 
 export interface RestaurantFormData {
+  restaurante_id?: number
   nombre_restaurante: string;
   direccion: string;
   telefono: string;

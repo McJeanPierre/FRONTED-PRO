@@ -80,7 +80,7 @@ const RestaurantList = () => {
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {restaurants.map((restaurant) => (
-              <tr key={restaurant.id}>
+              <tr key={restaurant.restaurante_id}>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="text-sm font-medium text-gray-900">{restaurant.nombre_restaurante}</div>
                 </td>
@@ -96,13 +96,13 @@ const RestaurantList = () => {
                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                   <div className="flex justify-end space-x-2">
                     <Link
-                      to={`/admin/restaurants/edit/${restaurant.id}`}
+                      to={`/admin/restaurants/edit/${restaurant.restaurante_id}`}
                       className="text-blue-600 hover:text-blue-900"
                     >
                       <Edit className="w-5 h-5" />
                     </Link>
                     <button
-                      onClick={() => restaurant.id && handleDelete(restaurant.id)}
+                      onClick={() => restaurant.restaurante_id && handleDelete(restaurant.restaurante_id)}
                       className="text-red-600 hover:text-red-900"
                     >
                       <Trash2 className="w-5 h-5" />
