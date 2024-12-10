@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { tableApi } from '../../services/tableApi';
-import { TableFormData, Table } from '../../types/table';
+import { TableFormData } from '../../types/table';
 import toast from 'react-hot-toast';
 
 const TableForm = () => {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { mesa_id } = useParams<{ mesa_id: string }>(); // Obtenemos el ID de la mesa desde la URL
   const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState<TableFormData>({
@@ -16,47 +16,55 @@ const TableForm = () => {
   });
 
   useEffect(() => {
-    if (id) {
+    // Si estamos editando, cargar datos de la mesa
+    if (mesa_id) {
       fetchTable();
     }
-  }, [id]);
+  }, [mesa_id]);
 
   const fetchTable = async () => {
+    setLoading(true);
     try {
-      const response = await tableApi.getAll();
-      const table = response.data.find((t: Table) => t.id === Number(id));
-      if (table) {
-        setFormData(table);
-      }
+      const response = await tableApi.getOne(Number(mesa_id)); // Obtener datos de la mesa
+      setFormData(response.data); // Llenar el formulario con los datos
     } catch (error) {
-      toast.error('Error al cargar la mesa');
-      navigate('/restaurant-admin/tables');
+      toast.error('Error al cargar los datos de la mesa');
+      navigate('/restaurant-admin/tables'); // Redirigir si falla
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-
-    console.log('Datos enviados:', formData); // Verificar datos
-    
-
+  
     try {
-      if (id) {
-        await tableApi.update(Number(id), formData);
+      if (mesa_id) {
+        // Actualizar mesa existente
+        console.log('Actualizando mesa:', mesa_id);
+        await tableApi.update(Number(mesa_id), formData);
         toast.success('Mesa actualizada con éxito');
       } else {
+        // Crear nueva mesa
+        console.log('Creando nueva mesa');
         await tableApi.create(formData);
         toast.success('Mesa creada con éxito');
       }
       navigate('/restaurant-admin/tables');
     } catch (error) {
+      console.error('Error al guardar:', error);
+      
       toast.error('Error al guardar la mesa');
     } finally {
       setLoading(false);
     }
-  };
 
+    console.log('Datos enviados:', formData);
+
+    
+  };
+  
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
     setFormData({
@@ -68,7 +76,7 @@ const TableForm = () => {
   return (
     <div className="max-w-2xl mx-auto px-4 py-8">
       <h1 className="text-2xl font-semibold text-gray-900 mb-6">
-        {id ? 'Editar Mesa' : 'Nueva Mesa'}
+        {mesa_id ? 'Editar Mesa' : 'Nueva Mesa'}
       </h1>
 
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -131,7 +139,7 @@ const TableForm = () => {
             disabled={loading}
             className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
           >
-            {loading ? 'Guardando...' : 'Guardar'}
+            {loading ? 'Guardando...' : mesa_id ? 'Actualizar' : 'Crear'}
           </button>
         </div>
       </form>
