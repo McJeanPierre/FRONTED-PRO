@@ -2,18 +2,18 @@ import api from './api';
 import { Table, TableFormData } from '../types/table';
 
 export const tableApi = {
-  getAll: (restaurantId: number) => 
-    api.get(`/restaurantes/${restaurantId}/mesas`),
+  getAll: () => 
+    api.get(`/admin/mesas`),
   
-  create: (restaurantId: number, data: TableFormData) => 
-    api.post(`/restaurantes/${restaurantId}/mesas`, data),
+  create: (data: TableFormData) => 
+    api.post(`/admin/mesas`, data),
   
-  update: (restaurantId: number, tableId: number, data: TableFormData) => 
-    api.put(`/restaurantes/${restaurantId}/mesas/${tableId}`, data),
+  update: (tableId: number, data: TableFormData) => 
+    api.put(`/admin/mesas/${tableId}`, data),
   
-  delete: (restaurantId: number, tableId: number) => 
-    api.delete(`/restaurantes/${restaurantId}/mesas/${tableId}`),
+  delete: (tableId: number) => 
+    api.delete(`/admin/mesas/${tableId}`),
   
-  updateAvailability: (restaurantId: number, tableId: number, disponible: boolean) => 
-    api.patch(`/restaurantes/${restaurantId}/mesas/${tableId}/disponibilidad`, { disponible })
+  updateAvailability: (tableId: number, disponible: boolean) => 
+    api.patch(`/admin/mesas/${tableId}/disponibilidad`, { disponible })
 };

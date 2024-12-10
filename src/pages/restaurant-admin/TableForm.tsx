@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { tableApi } from '../../services/tableApi';
-import { TableFormData } from '../../types/table';
+import { TableFormData, Table } from '../../types/table';
 import toast from 'react-hot-toast';
 
 const TableForm = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
-  const restaurantId = 1; // This should come from auth context
 
   const [formData, setFormData] = useState<TableFormData>({
     numero_mesa: 0,
@@ -24,8 +23,8 @@ const TableForm = () => {
 
   const fetchTable = async () => {
     try {
-      const response = await tableApi.getAll(restaurantId);
-      const table = response.data.find((t: any) => t.id === Number(id));
+      const response = await tableApi.getAll();
+      const table = response.data.find((t: Table) => t.id === Number(id));
       if (table) {
         setFormData(table);
       }
@@ -39,12 +38,15 @@ const TableForm = () => {
     e.preventDefault();
     setLoading(true);
 
+    console.log('Datos enviados:', formData); // Verificar datos
+    
+
     try {
       if (id) {
-        await tableApi.update(restaurantId, Number(id), formData);
+        await tableApi.update(Number(id), formData);
         toast.success('Mesa actualizada con éxito');
       } else {
-        await tableApi.create(restaurantId, formData);
+        await tableApi.create(formData);
         toast.success('Mesa creada con éxito');
       }
       navigate('/restaurant-admin/tables');
