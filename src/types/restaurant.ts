@@ -1,18 +1,18 @@
 export interface Restaurant {
   id?: number;
-  name: string;
-  address: string;
-  phone: string;
+  nombre_restaurante: string;
+  direccion: string;
+  telefono: string;
   email: string;
-  description: string;
+  descripcion: string;
   user_id?: number;
 }
 
 export interface RestaurantFormData {
-  name: string;
-  address: string;
-  phone: string;
+  nombre_restaurante: string;
+  direccion: string;
+  telefono: string;
   email: string;
-  description: string;
+  descripcion: string;
   user_id?: number;
 }

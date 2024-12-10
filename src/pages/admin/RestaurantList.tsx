@@ -82,13 +82,13 @@ const RestaurantList = () => {
             {restaurants.map((restaurant) => (
               <tr key={restaurant.id}>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm font-medium text-gray-900">{restaurant.name}</div>
+                  <div className="text-sm font-medium text-gray-900">{restaurant.nombre_restaurante}</div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-500">{restaurant.address}</div>
+                  <div className="text-sm text-gray-500">{restaurant.direccion}</div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="text-sm text-gray-500">{restaurant.phone}</div>
+                  <div className="text-sm text-gray-500">{restaurant.telefono}</div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <div className="text-sm text-gray-500">{restaurant.email}</div>

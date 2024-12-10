@@ -9,11 +9,11 @@ const RestaurantForm = () => {
   const { id } = useParams();
   const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState<RestaurantFormData>({
-    name: '',
-    address: '',
-    phone: '',
+    nombre_restaurante: '',
+    direccion: '',
+    telefono: '',
     email: '',
-    description: '',
+    descripcion: '',
   });
 
   useEffect(() => {
@@ -67,45 +67,45 @@ const RestaurantForm = () => {
 
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="nombre_restaurante" className="block text-sm font-medium text-gray-700">
             Nombre
           </label>
           <input
             type="text"
-            name="name"
-            id="name"
+            name="nombre_restaurante"
+            id="nombre_restaurante"
             required
-            value={formData.name}
+            value={formData.nombre_restaurante}
             onChange={handleChange}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
         </div>
 
         <div>
-          <label htmlFor="address" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="direccion" className="block text-sm font-medium text-gray-700">
             Dirección
           </label>
           <input
             type="text"
-            name="address"
-            id="address"
+            name="direccion"
+            id="direccion"
             required
-            value={formData.address}
+            value={formData.direccion}
             onChange={handleChange}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
         </div>
 
         <div>
-          <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="telefono" className="block text-sm font-medium text-gray-700">
             Teléfono
           </label>
           <input
             type="tel"
-            name="phone"
-            id="phone"
+            name="telefono"
+            id="telefono"
             required
-            value={formData.phone}
+            value={formData.telefono}
             onChange={handleChange}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
@@ -127,14 +127,14 @@ const RestaurantForm = () => {
         </div>
 
         <div>
-          <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="descripcion" className="block text-sm font-medium text-gray-700">
             Descripción
           </label>
           <textarea
-            name="description"
-            id="description"
+            name="descripcion"
+            id="descripcion"
             rows={4}
-            value={formData.description}
+            value={formData.descripcion}
             onChange={handleChange}
             className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
           />
