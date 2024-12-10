@@ -11,7 +11,8 @@ import Dashboard from './pages/restaurant-admin/Dashboard';
 import TableList from './pages/restaurant-admin/TableList';
 import TableForm from './pages/restaurant-admin/TableForm';
 import ProtectedRoute from './components/ProtectedRoute';
-import Payments from './pages/Payments';
+import Pricing from './pages/Pricing';
+import Checkout from './pages/Checkout';
 function App() {
   return (
     <Router>
@@ -23,7 +24,13 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="payments" element={<Payments />} />
+
+            {/* Rutas protegidas para Cliente */}
+            <Route element={<ProtectedRoute allowedRoles={[1]} redirectPath="/login" />}>
+              <Route path="/pricing" element={<Pricing />} />
+              <Route path="/checkout/:planId" element={<Checkout />} />
+            </Route>
+
             {/* Rutas protegidas para SuperAdmin */}
             <Route element={<ProtectedRoute allowedRoles={[3]} redirectPath="/login" />}>
               <Route path="/admin/restaurants" element={<RestaurantList />} />
@@ -39,6 +46,8 @@ function App() {
               <Route path="/restaurant-admin/tables/edit/:id" element={<TableForm />} />
             </Route>
           </Routes>
+
+          
           <Toaster position="top-right" />
         </div>
       </AuthProvider>

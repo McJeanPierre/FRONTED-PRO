@@ -24,4 +24,14 @@ export const restaurantApi = {
   delete: (id: number) => api.delete(`/superadmin/restaurante/${id}`),
 };
 
+
+export const paymentApi = {
+  processPayment: (data: {
+    numero_tarjeta: string;
+    fecha_expiracion: string;
+    cvc: string;
+    servicio_id: string;
+  }) => api.post('/cliente/comprar', data),
+};
+
 export default api;
