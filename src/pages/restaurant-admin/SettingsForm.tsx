@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
-import { restaurantApi } from '../../services/restaurantApi'; // Asegúrate de importar tu API correctamente
+import { restaurantApi } from '../../services/api'; // Asegúrate de importar tu API correctamente
 
 const SettingsForm = () => {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ const SettingsForm = () => {
   const fetchRestaurantData = async () => {
     setLoading(true);
     try {
-      const response = await restaurantApi.getRestaurantData(); // Asegúrate de que esta función existe en tu API
+      const response = await restaurantApi.getAssociatedRestaurant(); // Utiliza la nueva función
       setFormData(response.data);
     } catch (error) {
       toast.error('Error al cargar los datos del restaurante');
@@ -38,7 +38,9 @@ const SettingsForm = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      await restaurantApi.update(formData); // Utiliza el método update existente
+      const response = await restaurantApi.getAssociatedRestaurant();
+      const restaurantId = response.data.id; // Obtener el ID del restaurante asociado
+      await restaurantApi.update(restaurantId, formData); // Utiliza el método update existente
       toast.success('Configuración guardada con éxito');
       navigate('/restaurant-admin');
     } catch (error) {

@@ -22,8 +22,8 @@ export const restaurantApi = {
   create: (data: any) => api.post('/restaurantes', data),
   update: (id: number, data: any) => api.put(`/restaurantes/${id}`, data),
   delete: (id: number) => api.delete(`/superadmin/restaurante/${id}`),
+  getAssociatedRestaurant: () => api.get('/admin/restaurante/asociado'), // Nueva función para obtener el restaurante asociado
 };
-
 
 export const paymentApi = {
   processPayment: (data: {
