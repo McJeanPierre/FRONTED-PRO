@@ -109,14 +109,14 @@ const TableList = () => {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <button
-                    onClick={() => toggleAvailability(table.mesa_id, table.disponible || false)}
+                    onClick={() => toggleAvailability(table.mesa_id, table.disponibilidad || false)}
                     className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
-                      table.disponible
+                      table.disponibilidad
                         ? 'bg-green-100 text-green-800'
                         : 'bg-red-100 text-red-800'
                     }`}
                   >
-                    {table.disponible ? (
+                    {table.disponibilidad ? (
                       <>
                         <Check className="w-4 h-4 mr-1" />
                         Disponible
