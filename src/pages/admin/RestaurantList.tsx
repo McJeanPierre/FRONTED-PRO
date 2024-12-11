@@ -24,6 +24,7 @@ const RestaurantList = () => {
     }
   };
 
+  
   const handleDelete = async (id: number) => {
     if (window.confirm('¿Estás seguro de que deseas eliminar este restaurante?')) {
       try {
