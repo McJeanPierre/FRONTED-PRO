@@ -24,14 +24,6 @@ const Dashboard = () => {
           </div>
         </Link>
 
-        <Link to="/restaurant-admin/customers" className="block">
-          <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
-            <Users className="w-8 h-8 text-purple-600 mb-4" />
-            <h2 className="text-lg font-semibold text-gray-900">Clientes</h2>
-            <p className="text-gray-600 mt-2">Información de tus clientes</p>
-          </div>
-        </Link>
-
         <Link to="/restaurant-admin/settings" className="block">
           <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
             <Settings className="w-8 h-8 text-gray-600 mb-4" />

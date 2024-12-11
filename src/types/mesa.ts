@@ -3,15 +3,14 @@ export interface Mesa {
   numero_mesa: string;
   capacidad: number;
   ubicacion:string;
-  estado_mesa:boolean;
   restaurante_id: number; // La referencia al restaurante al que pertenece la mesa
   disponibilidad: boolean; // Estado de disponibilidad
 }
 
 export interface Reserva {
-  fecha: string;
-  hora: string;
-  numero_personas: number;
+  reserva_id?: number;
+  usuario_id?: number;
   mesa_id: number;
-  restaurante_id: number;
+  fecha_reserva: string;
+  estado: string;
 }

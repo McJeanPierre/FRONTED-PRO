@@ -19,11 +19,9 @@ const ReservationModal: React.FC<ReservationModalProps> = ({
   onSuccess
 }) => {
   const [formData, setFormData] = useState<Partial<Reserva>>({
-    fecha: '',
-    hora: '',
-    numero_personas: 1,
     mesa_id: table.mesa_id,
-    restaurante_id: table.restaurante_id
+    fecha_reserva: '',
+    estado: 'pendiente'
   });
 
   const [loading, setLoading] = useState(false);
@@ -36,6 +34,7 @@ const ReservationModal: React.FC<ReservationModalProps> = ({
       await clientApi.createReservation(formData);
       toast.success('Reserva creada con éxito');
       onSuccess();
+      
     } catch (error: any) {
       toast.error(error.response?.data?.message || 'Error al crear la reserva');
     } finally {
@@ -44,10 +43,20 @@ const ReservationModal: React.FC<ReservationModalProps> = ({
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    const { name, value } = e.target;
+    
+    // For datetime-local input, we need to handle the format
+    if (name === 'fecha_reserva') {
+      setFormData({
+        ...formData,
+        [name]: value
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value
+      });
+    }
   };
 
   return (
@@ -85,50 +94,24 @@ const ReservationModal: React.FC<ReservationModalProps> = ({
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Fecha
+                    Fecha y Hora de Reserva
                   </label>
                   <input
-                    type="date"
-                    name="fecha"
+                    type="datetime-local"
+                    name="fecha_reserva"
                     required
-                    min={new Date().toISOString().split('T')[0]}
-                    value={formData.fecha}
+                    min={new Date().toISOString().slice(0, 16)}
+                    value={formData.fecha_reserva}
                     onChange={handleChange}
                     className="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                   />
                 </div>
 
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Hora
-                  </label>
-                  <input
-                    type="time"
-                    name="hora"
-                    required
-                    value={formData.hora}
-                    onChange={handleChange}
-                    className="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Número de Personas
-                  </label>
-                  <input
-                    type="number"
-                    name="numero_personas"
-                    required
-                    min="1"
-                    max={table.capacidad}
-                    value={formData.numero_personas}
-                    onChange={handleChange}
-                    className="w-full rounded-lg border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                  />
-                  <p className="mt-1 text-sm text-gray-500">
-                    Capacidad máxima: {table.capacidad} personas
-                  </p>
+                <div className="bg-gray-50 p-4 rounded-lg">
+                  <h3 className="font-medium text-gray-900 mb-2">Detalles de la Mesa</h3>
+                  <p className="text-sm text-gray-600">Número de Mesa: {table.numero_mesa}</p>
+                  <p className="text-sm text-gray-600">Capacidad: {table.capacidad} personas</p>
+                  <p className="text-sm text-gray-600">Ubicación: {table.ubicacion}</p>
                 </div>
 
                 <button

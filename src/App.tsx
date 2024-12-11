@@ -16,6 +16,7 @@ import Checkout from './pages/Checkout';
 import Settings from './pages/restaurant-admin/SettingsForm';
 import ClientRestaurantList from './pages/client/RestaurantList';
 import TableListClient from './pages/client/TableList';
+import ReservationList from './pages/restaurant-admin/ReservationList';
 
 function App() {
   return (
@@ -51,6 +52,7 @@ function App() {
               <Route path="/restaurant-admin/tables/new" element={<TableForm />} />
               <Route path="/restaurant-admin/tables/edit/:mesa_id" element={<TableForm />} />
               <Route path="/restaurant-admin/settings" element={<Settings />} />
+              <Route path="/restaurant-admin/reservations" element={<ReservationList />} />
             </Route>
           </Routes>
 

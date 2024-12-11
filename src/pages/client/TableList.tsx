@@ -32,7 +32,7 @@ const TableList = () => {
   };
 
   const handleTableClick = (table: Mesa) => {
-    if (table.disponibilidad && table.estado_mesa) {
+    if (table.disponibilidad) {
       setSelectedTable(table);
       setIsModalOpen(true);
     } else {
@@ -62,14 +62,14 @@ const TableList = () => {
               whileHover={{ scale: 1.05 }}
               className={`
                 bg-white rounded-xl shadow-lg p-6 cursor-pointer
-                ${table.disponibilidad && table.estado_mesa ? 'hover:shadow-xl' : 'opacity-60'}
+                ${table.disponibilidad ? 'hover:shadow-xl' : 'opacity-60'}
               `}
               onClick={() => handleTableClick(table)}
             >
               <div className="flex flex-col items-center">
                 <div className={`
                   w-24 h-24 rounded-full flex items-center justify-center mb-4
-                  ${table.disponibilidad && table.estado_mesa ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'}
+                  ${table.disponibilidad  ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'}
                 `}>
                   <Users className="w-12 h-12" />
                 </div>
@@ -87,9 +87,9 @@ const TableList = () => {
                   <p className="mt-2">
                     <span className={`
                       px-3 py-1 rounded-full text-sm
-                      ${table.disponibilidad && table.estado_mesa ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'}
+                      ${table.disponibilidad  ? 'bg-green-100 text-green-600' : 'bg-red-100 text-red-600'}
                     `}>
-                      {table.disponibilidad && table.estado_mesa ? 'Disponible' : 'No Disponible'}
+                      {table.disponibilidad ? 'Disponible' : 'No Disponible'}
                     </span>
                   </p>
                 </div>
