@@ -28,16 +28,35 @@ const TableList = () => {
   };
 
   const handleDelete = async (mesa_id: number) => {
-    if (window.confirm('¿Estás seguro de que deseas eliminar esta mesa?')) {
-      try {
-        await tableApi.delete(mesa_id); // Eliminar la mesa
-        toast.success('Mesa eliminada con éxito');
-        fetchTables(); // Actualizar la lista después de eliminar
-      } catch (error) {
-        console.error('Error al eliminar la mesa:', error);
-        toast.error('Error al eliminar la mesa');
-      }
-    }
+    toast((t) => (
+      <div>
+        <p>¿Estás seguro de que deseas eliminar esta mesa?</p>
+        <div className="flex justify-end space-x-2 mt-2">
+          <button
+            onClick={async () => {
+              toast.dismiss(t.id);
+              try {
+                await tableApi.delete(mesa_id); // Eliminar la mesa
+                toast.success('Mesa eliminada con éxito');
+                fetchTables(); // Actualizar la lista después de eliminar
+              } catch (error) {
+                console.error('Error al eliminar la mesa:', error);
+                toast.error('Error al eliminar la mesa');
+              }
+            }}
+            className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
+          >
+            Eliminar
+          </button>
+          <button
+            onClick={() => toast.dismiss(t.id)}
+            className="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400"
+          >
+            Cancelar
+          </button>
+        </div>
+      </div>
+    ));
   };
 
   const toggleAvailability = async (mesa_id: number, currentStatus: boolean) => {
