@@ -14,6 +14,9 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Pricing from './pages/Pricing';
 import Checkout from './pages/Checkout';
 import Settings from './pages/restaurant-admin/SettingsForm';
+import ClientRestaurantList from './pages/client/RestaurantList';
+import TableListClient from './pages/client/TableList';
+
 function App() {
   return (
     <Router>
@@ -30,6 +33,8 @@ function App() {
             <Route element={<ProtectedRoute allowedRoles={[1]} redirectPath="/login" />}>
               <Route path="/pricing" element={<Pricing />} />
               <Route path="/checkout/:planId" element={<Checkout />} />
+              <Route path="/client/restaurants" element={<ClientRestaurantList />} />
+              <Route path="/client/restaurants/:restaurantId/tables" element={<TableListClient />} />
             </Route>
 
             {/* Rutas protegidas para SuperAdmin */}
