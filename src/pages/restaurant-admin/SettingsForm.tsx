@@ -18,6 +18,7 @@ const SettingsForm = () => {
     fetchRestaurantData();
   }, []);
 
+  
   const fetchRestaurantData = async () => {
     setLoading(true);
     try {
@@ -43,14 +44,17 @@ const SettingsForm = () => {
       toast.success('Configuración guardada con éxito');
       navigate('/restaurant-admin');
     } catch (error) {
-      console.error('Error al guardar la configuración:', error.response?.data || error.message);
+      if (error instanceof Error) {
+        console.error('Error al guardar la configuración:', (error as any).response?.data || error.message);
+      } else {
+        console.error('Error al guardar la configuración:', error);
+      }
       toast.error('Error al guardar la configuración');
     } finally {
       setLoading(false);
     }
   };
   
-
   return (
     <div className="max-w-4xl mx-auto py-8">
       <h1 className="text-2xl font-bold mb-6">Configuración del Restaurante</h1>

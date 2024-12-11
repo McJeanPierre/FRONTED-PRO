@@ -5,13 +5,13 @@ export interface Table {
   ubicacion:string;
   estado_mesa:boolean;
   restaurante_id: number; // La referencia al restaurante al que pertenece la mesa
-
+  disponibilidad: boolean; // Estado de disponibilidad
 }
 
 export interface TableFormData {
   mesa_id?: number; // Opcional para identificar la mesa en caso de edición
   numero_mesa: number;
   capacidad: number;
-  ubicacion:string;
-  estado_mesa?:boolean;
+  disponibilidad: boolean;
 }
+
