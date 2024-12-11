@@ -18,6 +18,7 @@ const SettingsForm = () => {
     fetchRestaurantData();
   }, []);
 
+  
   const fetchRestaurantData = async () => {
     setLoading(true);
     try {

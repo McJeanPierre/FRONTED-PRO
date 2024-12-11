@@ -2,6 +2,8 @@ export interface Table {
   mesa_id: number; // El identificador único de la mesa
   numero_mesa: number;
   capacidad: number;
+  ubicacion:string;
+  estado_mesa:boolean;
   restaurante_id: number; // La referencia al restaurante al que pertenece la mesa
   disponibilidad: boolean; // Estado de disponibilidad
 }
@@ -11,4 +13,6 @@ export interface TableFormData {
   numero_mesa: number;
   capacidad: number;
   disponibilidad: boolean;
+
 }
+

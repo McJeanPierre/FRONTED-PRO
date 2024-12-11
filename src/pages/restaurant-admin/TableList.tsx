@@ -27,6 +27,7 @@ const TableList = () => {
     }
   };
 
+  
   const handleDelete = async (mesa_id: number) => {
     toast((t) => (
       <div>
@@ -58,6 +59,7 @@ const TableList = () => {
       </div>
     ));
   };
+  
 
   const toggleAvailability = async (mesa_id: number, currentStatus: boolean) => {
     try {
