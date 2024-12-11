@@ -13,6 +13,7 @@ import TableForm from './pages/restaurant-admin/TableForm';
 import ProtectedRoute from './components/ProtectedRoute';
 import Pricing from './pages/Pricing';
 import Checkout from './pages/Checkout';
+import Settings from './pages/restaurant-admin/SettingsForm';
 function App() {
   return (
     <Router>
@@ -44,6 +45,7 @@ function App() {
               <Route path="/restaurant-admin/tables" element={<TableList />} />
               <Route path="/restaurant-admin/tables/new" element={<TableForm />} />
               <Route path="/restaurant-admin/tables/edit/:mesa_id" element={<TableForm />} />
+              <Route path="/restaurant-admin/settings" element={<Settings />} />
             </Route>
           </Routes>
 
