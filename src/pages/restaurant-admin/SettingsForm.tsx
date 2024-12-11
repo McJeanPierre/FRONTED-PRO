@@ -11,7 +11,7 @@ const SettingsForm = () => {
     direccion: '',
     telefono: '',
     email: '',
-    descripcion: '', // Agregar descripción al estado inicial
+    descripcion: '', 
   });
 
   useEffect(() => {
@@ -38,17 +38,18 @@ const SettingsForm = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await restaurantApi.getAssociatedRestaurant();
-      const restaurantId = response.data.id; // Obtener el ID del restaurante asociado
-      await restaurantApi.update(restaurantId, formData); // Utiliza el método update existente
+      // Llama directamente a `updaterestaurante` con los datos del formulario
+      await restaurantApi.updaterestaurante(formData);
       toast.success('Configuración guardada con éxito');
       navigate('/restaurant-admin');
     } catch (error) {
+      console.error('Error al guardar la configuración:', error.response?.data || error.message);
       toast.error('Error al guardar la configuración');
     } finally {
       setLoading(false);
     }
   };
+  
 
   return (
     <div className="max-w-4xl mx-auto py-8">

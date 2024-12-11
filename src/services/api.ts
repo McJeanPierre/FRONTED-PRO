@@ -23,6 +23,7 @@ export const restaurantApi = {
   update: (id: number, data: any) => api.put(`/restaurantes/${id}`, data),
   delete: (id: number) => api.delete(`/superadmin/restaurante/${id}`),
   getAssociatedRestaurant: () => api.get('/admin/restaurante/asociado'), // Nueva función para obtener el restaurante asociado
+  updaterestaurante: (data: any) => api.put('/admin/restaurante/actualizarasociado', data),
 };
 
 export const paymentApi = {
