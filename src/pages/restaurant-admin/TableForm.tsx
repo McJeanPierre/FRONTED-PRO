@@ -12,7 +12,8 @@ const TableForm = () => {
     const [formData, setFormData] = useState<TableFormData>({
         numero_mesa: 0,
         capacidad: 2,
-        disponible: true,
+        ubicacion: 'centro',
+        estado_mesa: true,
     });
 
     useEffect(() => {
@@ -30,7 +31,8 @@ const TableForm = () => {
             setFormData({
                 numero_mesa: mesaData.numero_mesa,
                 capacidad: mesaData.capacidad,
-                disponible: mesaData.disponible ?? true,
+                ubicacion: mesaData.ubicacion,
+                estado_mesa: mesaData.estado_mesa ?? true,
             });
         } catch (error) {
             toast.error('Error al cargar los datos de la mesa');
@@ -105,16 +107,30 @@ const TableForm = () => {
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     />
                 </div>
+                <div>
+                    <label htmlFor="ubicacion" className="block text-sm font-medium text-gray-700">
+                        ubicacion (mesa)
+                    </label>
+                    <input
+                        type="text"
+                        name="ubicacion"
+                        id="ubicacion"
+                        required
+                        value={formData.ubicacion}
+                        onChange={handleChange}
+                        className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    />
+                </div>
                 <div className="flex items-center">
                     <input
                         type="checkbox"
-                        name="disponible"
-                        id="disponible"
-                        checked={formData.disponible}
+                        name="estado_mesa"
+                        id="estado_mesa"
+                        checked={formData.estado_mesa}
                         onChange={handleChange}
                         className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                     />
-                    <label htmlFor="disponible" className="ml-2 block text-sm text-gray-900">
+                    <label htmlFor="estado_mesa" className="ml-2 block text-sm text-gray-900">
                         Disponible
                     </label>
                 </div>
