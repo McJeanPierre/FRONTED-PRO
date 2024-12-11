@@ -15,6 +15,7 @@ const TableForm = () => {
     disponibilidad: true,
   });
 
+  
   useEffect(() => {
     if (mesa_id) {
       console.log('Mesa ID:', mesa_id); // Verifica que el ID esté presente

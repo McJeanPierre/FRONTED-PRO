@@ -27,6 +27,7 @@ const TableList = () => {
     }
   };
 
+  
   const handleDelete = async (mesa_id: number) => {
     if (window.confirm('¿Estás seguro de que deseas eliminar esta mesa?')) {
       try {

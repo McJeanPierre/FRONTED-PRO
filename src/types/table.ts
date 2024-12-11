@@ -12,3 +12,4 @@ export interface TableFormData {
   capacidad: number;
   disponibilidad: boolean;
 }
+
