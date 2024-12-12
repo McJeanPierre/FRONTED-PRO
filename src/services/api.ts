@@ -26,6 +26,12 @@ export const restaurantApi = {
   updaterestaurante: (data: any) => api.put('/admin/restaurante/actualizarasociado', data),
 };
 
+export const clientApi = {
+  getRestaurants: () => api.get('/cliente/restaurante'),
+  getTables: (restaurantId: number) => api.get(`/cliente/mesas/restaurante/${restaurantId}`),
+  createReservation: (data: any) => api.post('/cliente/reservas', data),
+};
+
 export const paymentApi = {
   processPayment: (data: {
     numero_tarjeta: string;
