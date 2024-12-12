@@ -74,6 +74,7 @@ const Navbar = () => {
                       Restaurantes 
                     </Link>
                   </>
+              
                 )}
 
                 {/* Logout */}

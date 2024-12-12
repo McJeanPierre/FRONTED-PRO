@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { Users, MapPin } from 'lucide-react';
 import { clientApi } from '../../services/api';
 import { Mesa } from '../../types/mesa';
-import ReservationModal from '../../components/cliente/ReservationModal';
+import ReservationModal from '../../components/client/ReservationModal';
 import toast from 'react-hot-toast';
 
 const TableList = () => {

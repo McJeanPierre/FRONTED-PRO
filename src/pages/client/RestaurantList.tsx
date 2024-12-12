@@ -65,7 +65,7 @@ const ClientRestaurantList = () => {
                   </div>
                   <div className="flex items-center text-gray-600">
                     <Phone className="w-5 h-5 mr-3 text-blue-600" />
-                    <span className="text-sm">{restaurant.telefono}</span>
+                    <span className="text-sm">{restaurant.direccion}</span>
                   </div>
                   <div className="flex items-center text-gray-600">
                     <Mail className="w-5 h-5 mr-3 text-blue-600" />

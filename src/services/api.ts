@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Reserva } from '../types/reserva';
 
 const api = axios.create({
   baseURL: 'http://localhost:8000/api',
@@ -28,8 +29,17 @@ export const restaurantApi = {
 
 export const clientApi = {
   getRestaurants: () => api.get('/cliente/restaurante'),
-  getTables: (restaurantId: number) => api.get(`/cliente/mesas/restaurante/${restaurantId}`),
+  getTables: (restaurantId: number) => api.get(`cliente/mesas/restaurante/${restaurantId}`),
   createReservation: (data: any) => api.post('/cliente/reservas', data),
+  updatereservaclient: (data: any) => api.put('/cliente/restaurante/actualizarasociado', data),
+};
+
+export const reservaApi = {
+  getAll: () => api.get<{ data: Reserva[] }>('/admin/reservas'),
+  getOne: (id: number) => api.get<{ data: Reserva }>(`/admin/reservas/${id}`),
+  update: (id: number, data: Partial<Reserva>) => api.put(`/admin/reservas/${id}`, data),
+  updateStatus: (id: number, estado: string) => api.patch(`/admin/reservas/${id}/estado`, { estado }),
+  delete: (id: number) => api.delete(`/admin/reservas/${id}`),
 };
 
 export const paymentApi = {
